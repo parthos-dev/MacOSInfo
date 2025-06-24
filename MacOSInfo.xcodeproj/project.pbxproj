@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		96FDAE3F2E0B6F2B0032022A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 96FDAE3E2E0B6F240032022A /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		96CFD1BD2E0B473E00C7EA7A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		96CFD1AE2E0B473D00C7EA7A /* MacOSInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOSInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CFD1BC2E0B473E00C7EA7A /* MacOSInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacOSInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96CFD1C62E0B473E00C7EA7A /* MacOSInfoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacOSInfoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		96FDAE3E2E0B6F240032022A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		96CFD1A52E0B473D00C7EA7A = {
 			isa = PBXGroup;
 			children = (
+				96FDAE3E2E0B6F240032022A /* README.md */,
 				96CFD1B02E0B473D00C7EA7A /* MacOSInfo */,
 				96CFD1BF2E0B473E00C7EA7A /* MacOSInfoTests */,
 				96CFD1C92E0B473E00C7EA7A /* MacOSInfoUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FDAE3F2E0B6F2B0032022A /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
