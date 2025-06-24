@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var osInfo = SystemInfo()
     
+    @StateObject private var core0 = UsageHistory()
+    
     var body: some View {
         VStack (alignment: .leading, spacing: 6){
             Text("MacOSInfo - Viewer")
@@ -28,9 +30,19 @@ struct ContentView: View {
             Spacer()
             
             Text("* Thermal State: \(osInfo.thermalState)")
+            
+            Spacer()
+            
+            MiniGraphView(label: "Core 0", history: core0)
         }
         .padding()
         .frame(width: 420, height: 340)
+        .onAppear() {
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                let simulatedUsage = Double.random(in: 0.1...0.9)
+                core0.add(usage: simulatedUsage)
+            }
+        }
     }
 }
 
