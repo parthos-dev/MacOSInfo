@@ -8,7 +8,12 @@
 import Foundation
 
 class UsageHistory: ObservableObject {
-    @Published var usageHistory: [Double] = []
+    @Published var usageHistory: [Double] = [] {
+        didSet {
+            usageDidUpdate = Date()
+        }
+    }
+    @Published var usageDidUpdate: Date = Date()
     private let maxPoints: Int = 30
     
     func add(usage: Double) {

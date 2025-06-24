@@ -36,15 +36,20 @@ struct MiniGraphView: View {
             }
             context.stroke(path, with: .color(.green), lineWidth: 1)
         }
-        .frame(width: 100, height: 60)
+        .frame(width: 140, height: 60)
         .background(Color.black.opacity(0.1))
         .cornerRadius(8)
-        .overlay(
+        .overlay(alignment: .topLeading) {
             Text(label)
                 .font(.caption2)
                 .foregroundColor(.gray)
-                .padding(4),
-            alignment: .topLeading
-        )
+                .padding(4)
+        }
+        .overlay(alignment: .bottomTrailing) {
+            Text(String(format: "%.1f%%", (history.usageHistory.last ?? 0) * 100))
+                .font(.caption2)
+                .foregroundColor(.primary)
+                .padding(4)
+        }
     }
 }
