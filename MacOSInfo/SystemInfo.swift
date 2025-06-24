@@ -15,14 +15,38 @@ class SystemInfo: ObservableObject {
     @Published var totalRAM: String = ""
     @Published var uptime: String = ""
     
+    @Published var thermalState: String = ""
+    
+    private var updateTimer: Timer?
+    
     init() {
+        loadFixedInfo()
+        // First time to populate info
+        updateDynamicInfo()
+        
+        
+        updateTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) {
+            [weak self] _ in
+            self?.updateDynamicInfo()
+        }
+    }
+    
+    deinit {
+        updateTimer?.invalidate()
+    }
+    
+    private func loadFixedInfo() {
         macOSVersion = ProcessInfo.processInfo.operatingSystemVersionString
         modelIdentifier = getSysctlString(for: "hw.model")
         cpuName = getSysctlString(for: "machdep.cpu.brand_string")
         totalCpuCount = ProcessInfo.processInfo.processorCount.description
-        availableCpuCount = ProcessInfo.processInfo.activeProcessorCount.description
         totalRAM = formatBytes(ProcessInfo.processInfo.physicalMemory)
-        uptime = formatUptime(TimeInterval(ProcessInfo.processInfo.systemUptime))
+    }
+    
+    private func updateDynamicInfo() {
+        uptime = formatUptime(ProcessInfo.processInfo.systemUptime)
+        availableCpuCount = ProcessInfo.processInfo.activeProcessorCount.description
+        thermalState = getThermalState()
     }
     
     private func getSysctlString(for key: String) -> String {
@@ -31,6 +55,21 @@ class SystemInfo: ObservableObject {
         var buffer = [CChar](repeating: 0, count: size)
         sysctlbyname(key, &buffer, &size, nil, 0)
         return String(cString: buffer)
+    }
+    
+    private func getThermalState() -> String {
+        switch ProcessInfo.processInfo.thermalState {
+        case .nominal:
+            return "Nominal"
+        case .fair:
+            return "Fair"
+        case .serious:
+            return "Serious"
+        case .critical:
+            return "Critical"
+        @unknown default:
+            return "Unknown"
+        }
     }
     
     private func formatBytes(_ bytes: UInt64) -> String {

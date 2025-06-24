@@ -26,6 +26,8 @@ struct ContentView: View {
             Text("* Uptime: \(osInfo.uptime)")
             
             Spacer()
+            
+            Text("* Thermal State: \(osInfo.thermalState)")
         }
         .padding()
         .frame(width: 420, height: 340)
